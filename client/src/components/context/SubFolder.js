@@ -10,6 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AuthContext from './authContext';
 import AddIcon from '@material-ui/icons/Add';
+import NavbarContainer from '../../containers/NavbarContainer';
 
 function SubFolder(props) {
     const [open, setOpen] = useState(false);
@@ -89,6 +90,9 @@ function SubFolder(props) {
 
 const subfolder = localStorage.getItem("folderName")
     return (
+        <div>
+            <NavbarContainer/>
+        
         <div style={style2}>
             
             <h1>Sub Folder{context.folderName}</h1>
@@ -164,7 +168,7 @@ const subfolder = localStorage.getItem("folderName")
                     </form>
                 ))}
             </div>
-        </div>
+        </div></div>
 
     )
 
