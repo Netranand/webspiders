@@ -1,0 +1,86 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import IconButton from '@material-ui/core/IconButton';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import MenuIcon from '@material-ui/icons/Menu';
+import {UserFolderListItems } from './MenuItems';
+import Image from './webspiders.jpg';
+
+const styles = theme => ({
+   root: {
+    display: 'flex',
+  },
+  list: {
+    width: 250
+  },
+  fullList: {
+    width: 'auto'
+  },
+  toolbar: theme.mixins.toolbar
+});
+
+class UserNavbarLeftMenu extends React.Component {
+  state = {
+    left: false,
+    
+  };
+
+  toggleDrawer = open => () => {
+    this.setState({
+      left: open
+    });
+  };
+  handleDrawerClose = () => {
+    this.setState({left: false});
+  };
+
+  render() {
+    const { classes, user } = this.props;
+    const { left } = this.state;
+
+    const sideList = (
+      <div className={classes.list}>
+        <div className={classes.toolbar} />
+        <Divider />
+        <List>
+          <UserFolderListItems user={user} />
+        </List>
+       
+      </div>
+    );
+
+    return (
+      <div>
+        <MenuIcon onClick={this.toggleDrawer(true)} />
+        <Drawer open={left} onClose={this.toggleDrawer(false)}>
+        <text>
+          <br/>
+          <IconButton onClick={this.handleDrawerClose} style={{float:"right"}}>
+           <ChevronLeftIcon /> 
+          </IconButton>
+          <img src={Image} alt="sdsf" />
+        </text>
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={this.toggleDrawer(false)}
+            onKeyDown={this.toggleDrawer(false)}
+          >
+            {sideList}
+          </div>
+        </Drawer>
+      </div>
+    );
+  }
+}
+
+UserNavbarLeftMenu.propTypes = {
+  classes: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(UserNavbarLeftMenu);
